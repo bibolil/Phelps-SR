@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>File upload</h1>
+  <img [src]="url" height="200" /> <br />
+  <p></p>
+  <input type="file" (change)="onFileChange($event)" />
+  <br />
+  <p></p>
+  <button class="btn btn-primary" (click)="uploadFile()">Upscale</button>
+</div>
