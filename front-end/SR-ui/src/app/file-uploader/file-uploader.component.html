@@ -2,8 +2,12 @@
   <h1>File upload</h1>
   <img [src]="url" height="200" /> <br />
   <p></p>
+  <form [formGroup]="form" (ngSubmit)="uploadFile()">
   <input type="file" (change)="onFileChange($event)" />
   <br />
   <p></p>
-  <button class="btn btn-primary" (click)="uploadFile()">Upscale</button>
+  <button class="btn btn-primary" type="submit">upload</button>
+  </form>
+  <img  *ngIf="result === true"  [src]="{imageDataUrl}"/>
 </div>
+
