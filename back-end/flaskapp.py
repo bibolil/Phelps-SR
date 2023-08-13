@@ -5,20 +5,22 @@ from SwinIR import main_test_swinir
 from flask import Flask, request
 import shutil
 import os
-import jsonify
-from PIL import Image
-import io
-from base64 import encodebytes
+from imagekitio import ImageKit
+import base64
+
+def image_to_base64(image_path):
+    with open(image_path, "rb") as image_file:
+        base64_data = base64.b64encode(image_file.read())
+        base64_string = base64_data.decode("utf-8")
+        return base64_string
 
 app = Flask(__name__)
 CORS(app)
-
-def get_response_image(image_path):
-    pil_img = Image.open(image_path, mode='r') # reads the PIL image
-    byte_arr = io.BytesIO()
-    pil_img.save(byte_arr, format='PNG') # convert the PIL image to byte array
-    encoded_img = encodebytes(byte_arr.getvalue()).decode('ascii') # encode as base64
-    return encoded_img
+imagekit = ImageKit(
+    private_key='private_kUJhKvRhCn5khrW6cH6oFC85/bE=',
+    public_key='public_nDkkJ0XveuHGU7nBHHCFEed1iaU=',
+    url_endpoint = 'https://ik.imagekit.io/SR/'
+)
 
 @app.route('/SwinIR', methods=['GET', 'POST'])
 def swinIR_API():
@@ -46,10 +48,16 @@ def swinIR_API():
         print(error)
         return error,400
     main_test_swinir.main(body.get('task'),int(body.get('scale')),int(body.get('noise')),int(body.get('jpeg')),int(body.get('training_path_size')),large_model,model_path,upload_folder,None,tile,int(body.get('tile_overlap')))
-    filename="results/swinir_real_sr_x4/image_SwinIR.png" 
-    encoded_img = get_response_image(filename)
-    
-    return { 'Status' : 'Success', 'ImageBytes': encoded_img}
+    url="results/swinir_real_sr_x4/image_SwinIR.png"
+    filename = "image_SwinIR.png"
+    try:
+        upload = imagekit.upload_file(
+            file=image_to_base64(url),
+            file_name=filename,
+        ) 
+    except Exception as error:  
+        print(error)
+    return { 'Status' : 'Success','url':upload.response_metadata.raw["url"]}
 
 
 # def heros():

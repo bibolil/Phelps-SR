@@ -66,9 +66,9 @@ export class FileUploaderComponent {
       formData.append('image', this.selectedFile!);
 
     console.log(request);
-    this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res.ImageBytes)
-    const imageBlob = new Blob([res.ImageBytes]);
+    this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res)
     this.result=true
-    this.imageDataUrl = URL.createObjectURL(imageBlob);
+    this.imageDataUrl = res.url;
+    console.log(this.imageDataUrl);
   });
 }}
