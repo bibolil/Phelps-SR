@@ -27,8 +27,8 @@ export class FileUploaderComponent {
   
   }
 
+
   onFileChange(event:any) {
-    console.log(event);
     this.selectedFile = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -44,17 +44,7 @@ export class FileUploaderComponent {
 
   uploadFile() {
     const formData = new FormData();
-    console.log("this is working");
-    const request={"task":"real_sr",
-      "scale":"4",
-      "noise":"15",
-      "jpeg":"40",
-      "training_path_size":"128",
-      "model_large":"True",
-      "tile":"None",
-      "tile_overlap":"32",
-      "image":this.selectedFile};
-
+    
       formData.append('task', 'real_sr');
       formData.append('scale', '4');
       formData.append('noise', '15');
@@ -65,10 +55,18 @@ export class FileUploaderComponent {
       formData.append('tile_overlap', '32');
       formData.append('image', this.selectedFile!);
 
-    console.log(request);
     this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res)
     this.result=true
     this.imageDataUrl = res.url;
     console.log(this.imageDataUrl);
   });
-}}
+}
+
+downloadFile()
+{
+
+}
+
+
+
+}
