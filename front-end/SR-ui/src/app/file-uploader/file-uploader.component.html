@@ -1,14 +1,13 @@
-<div class="container">
-  <h1>File upload</h1>
-  <img [src]="url" height="200" /> <br />
-  <p></p>
+<h1>Image upload</h1>
+  <img [src]="url" height="200" />
   <form [formGroup]="form" (ngSubmit)="uploadFile()">
-  <input type="file" (change)="onFileChange($event)" />
-  <br />
+  <input type="file" (change)="onFileChange($event)" formControlName="image" />
   <p></p>
-  <button class="btn btn-primary" type="submit">upload</button>
+  <br>
+  <button class="btn btn-primary" [disabled]="!form.valid" type="submit">upscale</button>
   <p></p>
   </form>
-  <img  *ngIf="result === true"  [src]="imageDataUrl"/>
-</div>
 
+  <img  *ngIf="result === true"  [src]="imageDataUrl"/>
+  <p></p>
+  <button *ngIf="result === true" class="btn btn-primary" (click)="downloadFile()">Download</button>

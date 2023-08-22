@@ -7,13 +7,15 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import { ParametersComponent } from './parameters/parameters.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FilePreviewerComponent } from './file-previewer/file-previewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FileUploaderComponent,
-    ParametersComponent
+    ParametersComponent,
+    FilePreviewerComponent
   ],
   imports: [
     BrowserModule,

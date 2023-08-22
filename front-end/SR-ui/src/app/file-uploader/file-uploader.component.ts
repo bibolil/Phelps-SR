@@ -58,7 +58,6 @@ export class FileUploaderComponent {
     this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res)
     this.result=true
     this.imageDataUrl = res.url;
-    console.log(this.imageDataUrl);
   });
 }
 
