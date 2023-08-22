@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Service } from 'src/app.services';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-file-uploader',
@@ -8,17 +9,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class FileUploaderComponent {
   form!: FormGroup;
-
   selectedFile = null;
   url='';
-  request={};
   httpClient: any;
-  imageDataUrl!: string;
-  result: boolean = false;
 
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private service: Service ,private http: HttpClient) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -55,9 +52,10 @@ export class FileUploaderComponent {
       formData.append('tile_overlap', '32');
       formData.append('image', this.selectedFile!);
 
-    this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res)
-    this.result=true
-    this.imageDataUrl = res.url;
+    this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{
+    this.service.setRecievedImageDataUrl(res.url);
+    this.service.setRecievedImage(true);
+
   });
 }
 
