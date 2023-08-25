@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FileUploaderComponent } from './file-uploader/file-uploader.component';
-import { ParametersComponent } from './parameters/parameters.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilePreviewerComponent } from './file-previewer/file-previewer.component';
@@ -15,7 +14,6 @@ import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
     AppComponent,
     HeaderComponent,
     FileUploaderComponent,
-    ParametersComponent,
     FilePreviewerComponent,
     PhotoEditorComponent
   ],
