@@ -7,6 +7,7 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilePreviewerComponent } from './file-previewer/file-previewer.component';
+import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { FilePreviewerComponent } from './file-previewer/file-previewer.componen
     HeaderComponent,
     FileUploaderComponent,
     FilePreviewerComponent,
+    PhotoEditorComponent
 
   ],
   imports: [
