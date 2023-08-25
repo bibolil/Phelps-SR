@@ -8,12 +8,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilePreviewerComponent } from './file-previewer/file-previewer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FileUploaderComponent,
-    FilePreviewerComponent
+    FilePreviewerComponent,
+
   ],
   imports: [
     BrowserModule,
