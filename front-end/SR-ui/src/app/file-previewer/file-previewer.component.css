@@ -1,0 +1,6 @@
+.img-scale-down {
+    max-width: 800px;
+    max-height: 400px;
+    object-fit: scale-down;
+    overflow: hidden;
+}

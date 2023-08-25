@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-photo-editor": "^0.4.4"
+  }
+}

@@ -12,7 +12,7 @@ export class FileUploaderComponent {
   selectedFile = null;
   url='';
   httpClient: any;
-
+  inputchanged: boolean = false;
 
 
   constructor(private service: Service ,private http: HttpClient) {}
@@ -29,6 +29,7 @@ export class FileUploaderComponent {
     this.selectedFile = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
+      this.service.setRecievedImage(false);
 
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
