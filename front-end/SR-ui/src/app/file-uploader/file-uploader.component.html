@@ -4,6 +4,26 @@
   <input type="file" (change)="onFileChange($event)" formControlName="image" />
   <p></p>
   <br>
+  <div style="float:left">
+    <image-cropper 
+    [imageChangedEvent]="imgChangedEvent" 
+    [maintainAspectRatio]="false"
+    [onlyScaleDown]="true"
+    [resizeToWidth]="512"
+    format="png"
+    (imageCropped)="cropImg($event)"
+    (imageLoaded)="imgLoad()"
+    (cropperReady)="initCropper()"
+    (loadImageFailed)="loadImageFailed()"
+    >
+    </image-cropper>
+    </div>
+    
+    <div style="float:left">
+      <h4>Preview</h4>
+      <img [src]="cropImagePreview" />
+    </div>
+    
   <button class="btn btn-primary" [disabled]="!form.valid" type="submit">upscale</button>
   <p></p>
   </form>

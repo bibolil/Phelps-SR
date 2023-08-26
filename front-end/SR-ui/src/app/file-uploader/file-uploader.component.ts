@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/app.services';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 @Component({
   selector: 'app-file-uploader',
   templateUrl: './file-uploader.component.html',
@@ -10,12 +11,18 @@ import { Service } from 'src/app.services';
 export class FileUploaderComponent {
   form!: FormGroup;
 
-  selectedFile = null;
+  selectedFile="";
   url='';
   request={};
   httpClient: any;
   imageDataUrl!: string;
   result: boolean = false;
+  imgChangedEvent: any = "";
+  cropImagePreview: any="";
+  imgWidth: number = 0;
+  imgHeight: number = 0;
+  img: any="";
+  imageblob: any="";
 
 
 
@@ -30,18 +37,50 @@ export class FileUploaderComponent {
 
 
   onFileChange(event:any) {
-    this.selectedFile = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
+      this.selectedFile=event.target.files[0];
+      console.log("the file being sent is:");
+      console.log(this.selectedFile);
       this.service.setRecievedImage(false);
-
-      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-      reader.onload = (event:any) => { // called once readAsDataURL is completed
-        this.url = event.target.result;
-      }
+      this.imgChangedEvent = event;
+      this.img=event.target.files[0];
+      var img = new Image();
+        img.src=URL.createObjectURL(event.target.files[0])
+        img.onload = () => {
+            this.imgWidth = img.width;
+            this.imgHeight = img.height;
+           };
     }
 
+  }
+
+  imageCropped(event: ImageCroppedEvent) {}
+
+
+    loadImageFailed() {
+      alert("Image failed to load");
+    }
+
+    initCropper() {
+
+    }
+    imgLoad() {
+
+    }
+    cropImg(e: ImageCroppedEvent) {
+      this.cropImagePreview = e.objectUrl;
+      this.imageblob=e.blob;
+     }
+    
+    blobToFile = (theBlob: Blob, fileName:string): File => {       
+      return new File(
+          [theBlob as any], // cast as any
+          fileName, 
+          {
+              lastModified: new Date().getTime(),
+              type: theBlob.type 
+          }
+      )
   }
 
   uploadFile() {
@@ -55,7 +94,7 @@ export class FileUploaderComponent {
       formData.append('model_large', 'True');
       formData.append('tile', 'None');
       formData.append('tile_overlap', '32');
-      formData.append('image', this.selectedFile!);
+      formData.append('image', this.blobToFile(this.imageblob,'cropped.jpg'));
 
     this.http.post('http://localhost:5000/SwinIR',formData).subscribe((res: any)=>{console.log(res)
     this.service.setRecievedImage(true);
