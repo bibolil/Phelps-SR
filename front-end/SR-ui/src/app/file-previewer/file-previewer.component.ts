@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Renderer2 } from '@angular/core';
 import { Service } from 'src/app.services';
 @Component({
   selector: 'app-file-previewer',
@@ -11,7 +11,7 @@ export class FilePreviewerComponent {
   imageDataUrl: string= '';
 
 
-  constructor(private service: Service) { }
+  constructor(private service: Service,private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.service.getRecievedImage().subscribe((value: any) => {
@@ -21,6 +21,17 @@ export class FilePreviewerComponent {
       this.imageDataUrl = value;
     });
   }
+
+  downloadFile()
+  { 
+    const link = this.renderer.createElement('a');
+    link.setAttribute('target', '_blank');  
+    link.setAttribute('href', this.imageDataUrl);
+    link.setAttribute('download', 'upscale.jpg');
+    link.click();
+    link.remove();
+  }
+  
   
 
 }

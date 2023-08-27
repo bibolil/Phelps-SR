@@ -1,33 +1,31 @@
 <h1>Image upload</h1>
-  <img [src]="url" height="200" />
-  <form [formGroup]="form" (ngSubmit)="uploadFile()">
+<img [src]="url" height="200" />
+<form [formGroup]="form" (ngSubmit)="uploadFile()">
   <input type="file" (change)="onFileChange($event)" formControlName="image" />
-  <p></p>
-  <br>
-  <div style="float:left">
-    <image-cropper 
-    [imageChangedEvent]="imgChangedEvent" 
-    [maintainAspectRatio]="false"
-    [onlyScaleDown]="true"
-    [resizeToWidth]="512"
-    format="png"
-    (imageCropped)="cropImg($event)"
-    (imageLoaded)="imgLoad()"
-    (cropperReady)="initCropper()"
-    (loadImageFailed)="loadImageFailed()"
+  <div class="image-container" >
+    <image-cropper
+      class="cropper"
+      [imageChangedEvent]="imgChangedEvent"
+      [maintainAspectRatio]="false"
+      [onlyScaleDown]="true"
+      [resizeToWidth]="512"
+      format="png"
+      (imageCropped)="cropImg($event)"
+      (imageLoaded)="imgLoad()"
+      (cropperReady)="initCropper()"
+      (loadImageFailed)="loadImageFailed()"
     >
     </image-cropper>
-    </div>
     
-    <div style="float:left">
+    <div class="preview" >
       <h4>Preview</h4>
       <img [src]="cropImagePreview" />
     </div>
-    
-  <button class="btn btn-primary" [disabled]="!form.valid" type="submit">upscale</button>
-  <p></p>
-  </form>
+  </div>
 
-  <img  *ngIf="result === true"  [src]="imageDataUrl"/>
-  <p></p>
-  <button *ngIf="result === true" class="btn btn-primary" (click)="downloadFile()">Download</button>
+
+  <button class="btn btn-primary submit-btn" [disabled]="!form.valid" type="submit">
+    upscale
+  </button>
+</form>
+

@@ -16,7 +16,6 @@ export class FileUploaderComponent {
   request={};
   httpClient: any;
   imageDataUrl!: string;
-  result: boolean = false;
   imgChangedEvent: any = "";
   cropImagePreview: any="";
   imgWidth: number = 0;
@@ -39,8 +38,6 @@ export class FileUploaderComponent {
   onFileChange(event:any) {
     if (event.target.files && event.target.files[0]) {
       this.selectedFile=event.target.files[0];
-      console.log("the file being sent is:");
-      console.log(this.selectedFile);
       this.service.setRecievedImage(false);
       this.imgChangedEvent = event;
       this.img=event.target.files[0];
@@ -101,12 +98,6 @@ export class FileUploaderComponent {
     this.service.setRecievedImageDataUrl(res.url);
   });
 }
-
-downloadFile()
-{
-
-}
-
 
 
 }
