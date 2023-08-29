@@ -7,8 +7,9 @@ import { FileUploaderComponent } from './file-uploader/file-uploader.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilePreviewerComponent } from './file-previewer/file-previewer.component';
-import { ImgCropComponent } from './img-crop/img-crop.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import { UpscaledImgsComponent } from './upscaled-imgs/upscaled-imgs.component';
+import { UpscalerComponent } from './upscaler/upscaler.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     HeaderComponent,
     FileUploaderComponent,
     FilePreviewerComponent,
-    ImgCropComponent
+    UpscaledImgsComponent,
+    UpscalerComponent
 
   ],
   imports: [

@@ -59,9 +59,14 @@ def swinIR_API():
         print(error)
     return { 'Status' : 'Success','url':upload.response_metadata.raw["url"]}
 
+@app.route('/ImageKIT', methods=['GET'])
+def imageKIT_API():
+    list_images=[]
+    images = imagekit.list_files()
+    for i in images.response_metadata.raw:
+        list_images.append([i['fileId'],i['url'],i['createdAt']])
+    return list_images   
 
-# def heros():
-#     return {"name": "SwinIR"}
  
 if __name__ == '__main__':
     app.run(debug=True)

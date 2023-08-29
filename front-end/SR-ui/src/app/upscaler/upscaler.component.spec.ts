@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImgCropComponent } from './img-crop.component';
+import { UpscalerComponent } from './upscaler.component';
 
-describe('ImgCropComponent', () => {
-  let component: ImgCropComponent;
-  let fixture: ComponentFixture<ImgCropComponent>;
+describe('UpscalerComponent', () => {
+  let component: UpscalerComponent;
+  let fixture: ComponentFixture<UpscalerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ImgCropComponent]
+      declarations: [UpscalerComponent]
     });
-    fixture = TestBed.createComponent(ImgCropComponent);
+    fixture = TestBed.createComponent(UpscalerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
