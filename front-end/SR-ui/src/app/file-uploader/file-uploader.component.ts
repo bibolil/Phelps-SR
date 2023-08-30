@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Service } from 'src/app.services';
+import { Service } from 'src/app/app.services';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 @Component({
   selector: 'app-file-uploader',

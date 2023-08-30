@@ -1,5 +1,5 @@
 import { Component,Renderer2 } from '@angular/core';
-import { Service } from 'src/app.services';
+import { Service } from 'src/app/app.services';
 @Component({
   selector: 'app-file-previewer',
   templateUrl: './file-previewer.component.html',

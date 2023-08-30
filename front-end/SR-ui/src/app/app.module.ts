@@ -10,6 +10,7 @@ import { FilePreviewerComponent } from './file-previewer/file-previewer.componen
 import {ImageCropperModule} from 'ngx-image-cropper';
 import { UpscaledImgsComponent } from './upscaled-imgs/upscaled-imgs.component';
 import { UpscalerComponent } from './upscaler/upscaler.component';
+import { UpscaledImgComponent } from './upscaled-img/upscaled-img.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UpscalerComponent } from './upscaler/upscaler.component';
     FileUploaderComponent,
     FilePreviewerComponent,
     UpscaledImgsComponent,
-    UpscalerComponent
+    UpscalerComponent,
+    UpscaledImgComponent
 
   ],
   imports: [
