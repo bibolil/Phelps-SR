@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/app/app.services';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+import 'hammerjs';
+
 @Component({
   selector: 'app-file-uploader',
   templateUrl: './file-uploader.component.html',

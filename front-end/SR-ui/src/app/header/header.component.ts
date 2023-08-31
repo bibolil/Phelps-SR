@@ -8,12 +8,12 @@ import { BackEndService } from 'src/back.services';
 export class HeaderComponent {
   constructor( private BackEndService: BackEndService) { }
   ngOnInit() {
-    this.onFetch()
+    // this.onFetch()
   }
 
-  onFetch()
-  {
-    this.BackEndService.fetchData();
-  }
+  // onFetch()
+  // {
+  //   this.BackEndService.fetchData();
+  // }
 
 }
