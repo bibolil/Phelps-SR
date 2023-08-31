@@ -9,12 +9,14 @@ import { Service } from '../app.services';
 })
 export class UpscaledImgsComponent {
   listOfImgs: Img[] = [];
+  test?: any;
   constructor( private Service: Service) { }
   ngOnInit() {
-
+    console.log("ngOnInit");
     this.Service.listChangedEvent.subscribe(
       (listOfImgs: Img[]) => {
         this.listOfImgs = this.Service.getImages();
+        
       });
 
   }
