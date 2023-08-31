@@ -9,4 +9,6 @@ import { Img } from '../img.model';
 export class UpscaledImgComponent {
   @Input() img?: Img;
 
+ 
+
 }

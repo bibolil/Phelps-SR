@@ -5,10 +5,11 @@ imagekit = ImageKit(
     url_endpoint = 'https://ik.imagekit.io/SR/'
 )
 list_images=[]
+keys=['fileId','url','createdAt']
 def load_images():
     images = imagekit.list_files()
     for i in images.response_metadata.raw:
-        list_images.append([i['fileId'],i['url'],i['createdAt']])
+        list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt']])))
     return list_images   
 
 

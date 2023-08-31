@@ -61,10 +61,11 @@ def swinIR_API():
 
 @app.route('/ImageKIT', methods=['GET'])
 def imageKIT_API():
+    keys=['id','imagePath','creationtime']
     list_images=[]
     images = imagekit.list_files()
     for i in images.response_metadata.raw:
-        list_images.append([i['fileId'],i['url'],i['createdAt']])
+        list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt']])))
     return list_images   
 
  
