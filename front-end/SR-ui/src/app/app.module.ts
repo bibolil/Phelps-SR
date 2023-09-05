@@ -11,6 +11,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
 import { UpscaledImgsComponent } from './upscaled-imgs/upscaled-imgs.component';
 import { UpscalerComponent } from './upscaler/upscaler.component';
 import { UpscaledImgComponent } from './upscaled-img/upscaled-img.component';
+import { LightboxModule } from 'ngx-lightbox';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { UpscaledImgComponent } from './upscaled-img/upscaled-img.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    LightboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
