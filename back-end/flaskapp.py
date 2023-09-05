@@ -65,7 +65,7 @@ def imageKIT_API():
     list_images=[]
     images = imagekit.list_files()
     for i in images.response_metadata.raw:
-        list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt']])))
+        list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt'],i['thumbnail']])))
     return list_images   
 
  
