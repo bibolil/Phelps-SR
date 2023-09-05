@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@angular/platform-browser": "^16.2.2",
+    "ngx-image-cropper": "^7.0.2",
+    "ngx-photo-editor": "^0.4.4"
+  }
+}
