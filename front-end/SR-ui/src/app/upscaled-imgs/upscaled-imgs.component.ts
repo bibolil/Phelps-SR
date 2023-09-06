@@ -43,7 +43,6 @@ export class UpscaledImgsComponent {
  open(index: number): void {
   // open lightbox
   this._lightbox.open(this._albums, index);
-  console.log(this._albums[index].src);
 }
 
 close(): void {
