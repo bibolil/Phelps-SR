@@ -68,6 +68,10 @@ def imageKIT_API():
         list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt'],i['thumbnail']])))
     return list_images   
 
- 
+@app.route('/YOLO',methods=['GET','POST'])
+def cropper():
+    
+    return "true"
+
 if __name__ == '__main__':
     app.run(debug=True)
