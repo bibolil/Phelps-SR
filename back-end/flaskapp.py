@@ -7,6 +7,7 @@ import shutil
 import os
 from imagekitio import ImageKit
 import base64
+import sys
 
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
@@ -14,7 +15,12 @@ def image_to_base64(image_path):
         base64_string = base64_data.decode("utf-8")
         return base64_string
 
+sys.path.append('yolo')
+from yolo import yolov8
+
+
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 CORS(app)
 imagekit = ImageKit(
     private_key='private_kUJhKvRhCn5khrW6cH6oFC85/bE=',
@@ -70,8 +76,21 @@ def imageKIT_API():
 
 @app.route('/YOLO',methods=['GET','POST'])
 def cropper():
+    #To do make this folder making in an outsider function
+    img=request.files['image']
+    upload_folder = 'inputs'
+    result_folder = 'results'
+    if os.path.isdir(upload_folder):
+            shutil.rmtree(upload_folder)
+    if os.path.isdir(result_folder):
+            shutil.rmtree(result_folder)
+    os.mkdir(upload_folder)
+    os.mkdir(result_folder)
+    dst_path = os.path.join(upload_folder,'image_yolo.png')
+    img.save(dst_path)
+    crops=yolov8.cropper(dst_path)
+    return crops
     
-    return "true"
 
 if __name__ == '__main__':
     app.run(debug=True)
