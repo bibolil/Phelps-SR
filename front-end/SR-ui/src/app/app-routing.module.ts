@@ -17,7 +17,8 @@ const routes: Routes = [
   {
     path:'upscaler',
     component:UpscalerComponent
-  }
+  },
+
 
 ];
 

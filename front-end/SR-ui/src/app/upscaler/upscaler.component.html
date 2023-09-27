@@ -1,11 +1,19 @@
-<div class="row">
-    <div class="p-4 ">
+<div *ngIf="Manual">
+  <div class="align-right">
+    <button>Auto crop with AI</button>
+  </div>
+  <div class="row">
+    <div class="p-4">
       <app-file-uploader></app-file-uploader>
     </div>
   </div>
   <div class="row">
-    <div class="p-4 ">
+    <div class="p-4">
       <h1>Image displayer</h1>
       <app-file-previewer></app-file-previewer>
     </div>
   </div>
+</div>
+<div *ngIf="Manual == false">
+  <app-file-uploader-yolo></app-file-uploader-yolo>
+</div>

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./upscaler.component.css']
 })
 export class UpscalerComponent {
+  Manual: boolean = false;
 
 }

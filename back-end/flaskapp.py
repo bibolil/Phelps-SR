@@ -76,7 +76,7 @@ def imageKIT_API():
 
 @app.route('/YOLO',methods=['GET','POST'])
 def cropper():
-    #To do make this folder making in an outsider function
+    #To do make this folder making in an outsider function used in SwinIR_API and cropper functions
     img=request.files['image']
     upload_folder = 'inputs'
     result_folder = 'results'

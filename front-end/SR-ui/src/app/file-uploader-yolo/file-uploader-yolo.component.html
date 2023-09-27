@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Auto crop using AI</h1>
+    <img [src]="url" height="200" /> <br />
+    <p></p>
+    <form [formGroup]="form" (ngSubmit)="uploadFile()" > 
+    <input type="file" (change)="onFileChange($event)" formControlName="image" />
+    <br />
+    <p></p>
+    <button class="btn btn-primary submit-btn" [disabled]="!form.valid" type="submit">Crop objects</button>
+    </form>
+  </div>

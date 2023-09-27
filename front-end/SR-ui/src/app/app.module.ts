@@ -12,6 +12,7 @@ import { UpscaledImgsComponent } from './upscaled-imgs/upscaled-imgs.component';
 import { UpscalerComponent } from './upscaler/upscaler.component';
 import { UpscaledImgComponent } from './upscaled-img/upscaled-img.component';
 import { LightboxModule } from 'ngx-lightbox';
+import { FileUploaderYoloComponent } from './file-uploader-yolo/file-uploader-yolo.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LightboxModule } from 'ngx-lightbox';
     FilePreviewerComponent,
     UpscaledImgsComponent,
     UpscalerComponent,
-    UpscaledImgComponent
+    UpscaledImgComponent,
+    FileUploaderYoloComponent
 
   ],
   imports: [
