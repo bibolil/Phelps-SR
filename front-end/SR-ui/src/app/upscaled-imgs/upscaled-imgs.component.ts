@@ -10,7 +10,6 @@ import { Lightbox } from 'ngx-lightbox';
 })
 export class UpscaledImgsComponent {
   listOfImgs: Img[] = [];
-  test?: any;
   _albums: any = [];
 
   constructor(private _lightbox: Lightbox, private Service: Service, private BackEndService: BackEndService) { }

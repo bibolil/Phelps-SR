@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Service } from 'src/app/app.services';
-
+import { CroppedImgs } from "src/app/img.model";
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-file-uploader-yolo',
   templateUrl: './file-uploader-yolo.component.html',
@@ -12,14 +13,23 @@ export class FileUploaderYoloComponent {
   form!: FormGroup;
   selectedFile = null;
   url='';
-  
+  CropedImgs: CroppedImgs[] = [];
+  loading = false;
 
-  constructor(private http:HttpClient, private service:Service) {}
+  constructor(private http:HttpClient, private service:Service, private sanitizer: DomSanitizer) {}
+
+  displayImageFromBase64(base64Image: string) {
+    const blob = new Blob([base64Image], { type: 'image/png' });
+    const url = URL.createObjectURL(blob);
+
+    return url;
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
       image: new FormControl(null, [Validators.required]),
     }); 
+    this.loading = false;
   
   }
 
@@ -40,8 +50,22 @@ export class FileUploaderYoloComponent {
   uploadFile() {
     const formData = new FormData();
     formData.append('image',(this.selectedFile as any));
-    this.http.post('http://localhost:5000/YOLO',formData).subscribe((res: any)=>{console.log(res)
-    
+    this.http.post('http://localhost:5000/YOLO',formData).subscribe((res:any)=>{
+    for (const key in res) {
+      const urls = [];
+      // TO FIX URLS BLOBS ARE TEMPORARY AND NEED TO FIND A WAY TO STORE THEM.
+      for (const img in res[key]) {
+        urls.push(this.displayImageFromBase64(img));
+      }
+      console.log(urls);
+      const crop = new CroppedImgs(key,res[key],urls);
+      this.CropedImgs.push(crop);
+    }
+    this.service.setCropedImgs(this.CropedImgs);
+    this.loading = true;
+    //to-do add another component to display the cropped images and allow select option to choose which one to upscale.
+    //eventchangedemitter to send the cropped images to the new component.
+    //already declared in app.services.ts
   });
   }
 

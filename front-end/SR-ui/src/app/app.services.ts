@@ -1,14 +1,16 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { BehaviorSubject } from 'rxjs';
-import { Img } from "./img.model";
+import { Img,CroppedImgs } from "./img.model";
 
 @Injectable({providedIn: 'root'})
 export class Service{
     listChangedEvent: EventEmitter <Img[]>= new EventEmitter();
+    listChangedEvent2: EventEmitter <CroppedImgs[]>= new EventEmitter();
     listOfImgs: Img[] = [];
-
+    CropedImgs: CroppedImgs[] = [];
     RecievedImage= new BehaviorSubject<boolean>(false);
     ImageDataUrl  =  new BehaviorSubject<string>('');
+
 
     constructor(){}
 
@@ -21,6 +23,14 @@ export class Service{
         this.listChangedEvent.emit(this.listOfImgs);
     }
 
+    setCropedImgs(imgs: CroppedImgs[]){
+        this.CropedImgs = imgs;
+        this.listChangedEvent2.emit(this.CropedImgs);
+    }
+
+    getCropedImgs(){
+        return this.CropedImgs;
+    }
 
 
     setRecievedImage(value: boolean){

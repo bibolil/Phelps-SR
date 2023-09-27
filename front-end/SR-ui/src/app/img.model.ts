@@ -1,3 +1,5 @@
+
+
 export class Img
 {
     constructor(
@@ -8,4 +10,14 @@ export class Img
     )
     {}
 
+}
+
+export class CroppedImgs
+{
+    constructor(
+        public label: string,
+        public images: string[],
+        public urls: string[]
+    )
+     {}
 }

@@ -18,7 +18,7 @@ def cropper(image_path):
     for subdir, dirs, files in os.walk(rootdir):
         label=subdir[len(rootdir)+1:]
         cropped_images = []    
-        for file in files:
+        for file in files: 
             cropped_images.append(image_to_base64(os.path.join(subdir, file)))
         if(label!=''):
             yolo_output[label]=cropped_images
