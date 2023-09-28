@@ -13,7 +13,7 @@
 
       <li *ngFor="let crop of CropedImgs; index as i;">
         {{crop.label}}
-       <img *ngFor=" let url of crop.urls; index as j;" src={{url}}>
+       <img *ngFor=" let url of crop.urls; index as j;" [src]=url>
         
       </li>
 

@@ -1,3 +1,4 @@
+import { SafeUrl } from "@angular/platform-browser";
 
 
 export class Img

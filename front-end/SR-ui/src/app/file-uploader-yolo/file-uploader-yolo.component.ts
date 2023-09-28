@@ -53,11 +53,12 @@ export class FileUploaderYoloComponent {
     this.http.post('http://localhost:5000/YOLO',formData).subscribe((res:any)=>{
     for (const key in res) {
       const urls = [];
+      const header= 'data:image/png;base64,';
       // TO FIX URLS BLOBS ARE TEMPORARY AND NEED TO FIND A WAY TO STORE THEM.
       for (const img in res[key]) {
-        urls.push(this.displayImageFromBase64(img));
+        console.log(header+res[key][img]);
+        urls.push((header+res[key][img]));
       }
-      console.log(urls);
       const crop = new CroppedImgs(key,res[key],urls);
       this.CropedImgs.push(crop);
     }
