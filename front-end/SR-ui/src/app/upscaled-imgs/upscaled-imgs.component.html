@@ -1,5 +1,5 @@
 <div class="imgcontainer">
-	<div class="gallery" *ngFor="let image of _albums; let i=index">
+	<div class="gallery" *ngFor="let image of this.backEndService._albums; let i=index">
 	  <img src="{{image.thumb}}" (click)="open(i)" />
 	</div>
 </div>

@@ -1,6 +1,6 @@
-<div *ngIf="Manual">
+<div *ngIf="manual">
   <div class="align-right">
-    <button>Auto crop with AI</button>
+    <button class="btn btn-outline-primary" (click)="switchToAuto()">Auto crop with AI</button>
   </div>
   <div class="row">
     <div class="p-4">
@@ -14,6 +14,9 @@
     </div>
   </div>
 </div>
-<div *ngIf="Manual == false">
-  <app-file-uploader-yolo></app-file-uploader-yolo>
+<div *ngIf="manual == false">
+  <div class="align-right">
+    <button class="btn btn-outline-primary" (click)="switchToManual()">Manual crop</button>
+  </div>
+      <app-file-uploader-yolo></app-file-uploader-yolo>
 </div>

@@ -1,22 +1,46 @@
 <div class="container">
-    <h1>Auto crop using AI</h1>
-    <img [src]="url" height="200" /> <br />
-    <p></p>
-    <form [formGroup]="form" (ngSubmit)="uploadFile()" > 
-    <input type="file" (change)="onFileChange($event)" formControlName="image" />
-    <br />
-    <p></p>
-    <button class="btn btn-primary submit-btn" [disabled]="!form.valid" type="submit">Crop objects</button>
-    </form>
-
+  <mat-grid-list cols="4" rowHeight="50px">
+    <mat-grid-tile [colspan]="4" [rowspan]="1" class="title">
+      <h1>Auto crop using AI</h1>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="7">
+      <form [formGroup]="form" (ngSubmit)="uploadFile()">
+        <h1>Image upload</h1>
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          formControlName="image"
+        />
+        <p></p>
+        <img [src]="url" height="200" />
+        <p></p>
+        <button
+          class="btn btn-primary submit-btn"
+          [disabled]="!form.valid"
+          type="submit"
+        >
+          Crop objects
+        </button>
+      </form>
+    </mat-grid-tile>
     <div *ngIf="loading">
-
-      <li *ngFor="let crop of CropedImgs; index as i;">
-        {{crop.label}}
-       <img *ngFor=" let url of crop.urls; index as j;" [src]=url>
-        
-      </li>
-
+      <div>
+        <mat-grid-tile [colspan]="4" [rowspan]="6">
+          <ul *ngFor="let crop of CropedImgs">
+            <h3>
+            {{
+              crop.label
+            }}
+          </h3>
+            <li *ngFor="let url of crop.urls">
+              <input type="checkbox" [id]="url" />
+              <label [for]="url">
+                <img [src]="url" alt="{{ crop.label }}" />
+              </label>
+            </li>
+          </ul>
+        </mat-grid-tile>
+      </div>
     </div>
-
-  </div>
+  </mat-grid-list>
+</div>

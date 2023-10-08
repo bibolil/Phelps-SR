@@ -11,32 +11,18 @@ import { Lightbox } from 'ngx-lightbox';
 export class UpscaledImgsComponent {
   listOfImgs: Img[] = [];
   _albums: any = [];
-
-  constructor(private _lightbox: Lightbox, private Service: Service, private BackEndService: BackEndService) { }
+  constructor(private _lightbox: Lightbox, private Service: Service, public backEndService: BackEndService) {
+   }
 
   onFetch()
-  {
-    this.BackEndService.fetchData();
+  { if(this.Service.listOfImgs.length==0)
+    this.backEndService.fetchData();
+    this._albums = this.backEndService._albums;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.onFetch()
-    //"es2el omar for best practice to fetch msh kol mara i request server"
-    this.Service.listChangedEvent.subscribe(
-      (listOfImgs: Img[]) => {
-        this.listOfImgs = this.Service.getImages();
-        for(let i of this.listOfImgs)
-        {
-          const album= {
-            src: i.imagePath,
-            caption: '',
-            thumb: i.thumbnail
-          }
-          this._albums.push(album);
-        }
-      });
-   
-    
+        //this.listOfImgs = this.Service.getImages();    
  }
  
  open(index: number): void {

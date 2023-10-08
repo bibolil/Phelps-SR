@@ -54,9 +54,7 @@ export class FileUploaderYoloComponent {
     for (const key in res) {
       const urls = [];
       const header= 'data:image/png;base64,';
-      // TO FIX URLS BLOBS ARE TEMPORARY AND NEED TO FIND A WAY TO STORE THEM.
       for (const img in res[key]) {
-        console.log(header+res[key][img]);
         urls.push((header+res[key][img]));
       }
       const crop = new CroppedImgs(key,res[key],urls);

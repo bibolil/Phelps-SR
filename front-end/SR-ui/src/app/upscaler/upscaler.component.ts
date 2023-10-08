@@ -6,6 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./upscaler.component.css']
 })
 export class UpscalerComponent {
-  Manual: boolean = false;
+  manual: boolean = true;
+
+  constructor() { }
+
+  switchToAuto() {
+    this.manual= false;
+  }
+  switchToManual() {
+    this.manual= true;
+  }
 
 }

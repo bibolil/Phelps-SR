@@ -13,6 +13,9 @@ import { UpscalerComponent } from './upscaler/upscaler.component';
 import { UpscaledImgComponent } from './upscaled-img/upscaled-img.component';
 import { LightboxModule } from 'ngx-lightbox';
 import { FileUploaderYoloComponent } from './file-uploader-yolo/file-uploader-yolo.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,7 @@ import { FileUploaderYoloComponent } from './file-uploader-yolo/file-uploader-yo
     UpscaledImgsComponent,
     UpscalerComponent,
     UpscaledImgComponent,
-    FileUploaderYoloComponent
+    FileUploaderYoloComponent,
 
   ],
   imports: [
@@ -32,7 +35,9 @@ import { FileUploaderYoloComponent } from './file-uploader-yolo/file-uploader-yo
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    LightboxModule
+    LightboxModule,
+    BrowserAnimationsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
