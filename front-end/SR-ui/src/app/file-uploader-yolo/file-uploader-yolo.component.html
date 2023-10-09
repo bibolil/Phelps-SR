@@ -35,12 +35,22 @@
             <li *ngFor="let url of crop.urls">
               <input type="checkbox" [id]="url" />
               <label [for]="url">
-                <img [src]="url" alt="{{ crop.label }}" />
+                <img [src]="url" alt="{{ crop.label }}" (click)="onImageClick($event)"/>
               </label>
             </li>
           </ul>
         </mat-grid-tile>
-      </div>
+  </div>
+      <mat-grid-tile [colspan]="4" [rowspan]="1">
+        <button
+        class="btn btn-primary submit-btn"
+        (click)="upscale_selected_items()"
+      >
+        Proceed to upscale
+      </button>
+    </mat-grid-tile>
     </div>
+ 
+
   </mat-grid-list>
 </div>

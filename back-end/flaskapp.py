@@ -14,6 +14,11 @@ def image_to_base64(image_path):
         base64_data = base64.b64encode(image_file.read())
         base64_string = base64_data.decode("utf-8")
         return base64_string
+def base64_to_image(base64_string):
+    header, base64_data = base64_string.split(",", 1)
+
+
+
 
 sys.path.append('yolo')
 from yolo import yolov8
@@ -27,6 +32,29 @@ imagekit = ImageKit(
     public_key='public_nDkkJ0XveuHGU7nBHHCFEed1iaU=',
     url_endpoint = 'https://ik.imagekit.io/SR/'
 )
+
+@app.route('/SwinIR_multi_images', methods=['GET', 'POST'])
+def swinIR_multi_images():
+    # ERROR WITH BASE64 CONVERSION TO FIX 
+    # upload_folder = 'inputs'
+    # result_folder = 'results'
+    # if os.path.isdir(upload_folder):
+    #         shutil.rmtree(upload_folder)
+    # if os.path.isdir(result_folder):
+    #         shutil.rmtree(result_folder)
+    # os.mkdir(upload_folder)
+    # os.mkdir(result_folder)
+    # for index, base64_string in request.form.items():
+    #     dst_path = os.path.join(upload_folder,'image'+index+'.jpg')
+    #     base64_code=base64_string.split(",", 1)
+    #     decoded_image = base64.b64decode(base64_code)
+    #     image = Image.open(decoded_image)
+    #     image.save(dst_path)
+
+
+        
+
+    return { 'Status' : 'Success'}
 
 @app.route('/SwinIR', methods=['GET', 'POST'])
 def swinIR_API():
@@ -72,7 +100,8 @@ def imageKIT_API():
     images = imagekit.list_files()
     for i in images.response_metadata.raw:
         list_images.append(dict(zip(keys, [i['fileId'],i['url'],i['createdAt'],i['thumbnail']])))
-    return list_images   
+    return list_images
+
 
 @app.route('/YOLO',methods=['GET','POST'])
 def cropper():

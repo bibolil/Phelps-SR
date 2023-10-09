@@ -15,15 +15,10 @@ export class FileUploaderYoloComponent {
   url='';
   CropedImgs: CroppedImgs[] = [];
   loading = false;
+  selectedCrops: any[] = [];
 
   constructor(private http:HttpClient, private service:Service, private sanitizer: DomSanitizer) {}
 
-  displayImageFromBase64(base64Image: string) {
-    const blob = new Blob([base64Image], { type: 'image/png' });
-    const url = URL.createObjectURL(blob);
-
-    return url;
-  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -46,6 +41,25 @@ export class FileUploaderYoloComponent {
     
 
   }
+  
+
+  // to add when clicking outside the img boundries precisely in the label
+  onImageClick(event: any){
+    const imageUrl = event.target.src;
+    //imageALT to divide later by labels
+    const imageAlt = event.target.alt;
+    const index = this.selectedCrops.indexOf(imageUrl);
+      if (index !== -1) {
+        this.selectedCrops.splice(index, 1);
+        
+      }    
+    else
+    {
+     this.selectedCrops.push(imageUrl);
+    }
+    console.log(this.selectedCrops);
+  }
+
 
   uploadFile() {
     const formData = new FormData();
@@ -66,6 +80,19 @@ export class FileUploaderYoloComponent {
     //eventchangedemitter to send the cropped images to the new component.
     //already declared in app.services.ts
   });
+  }
+
+  upscale_selected_items(){
+    const formData = new FormData();
+    const dictionary = this.selectedCrops.reduce((acc, element, index) => {
+      acc[index] = element;
+      return acc;
+    }, {});
+    const keys = Object.keys(dictionary);
+    for (const key of keys) {
+      formData.append(key,(dictionary[key] as string));
+    }
+    this.http.post('http://localhost:5000/SwinIR_multi_images',formData).subscribe((res:any)=>{console.log(res);});
   }
 
 }

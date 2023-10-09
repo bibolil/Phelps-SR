@@ -13,6 +13,7 @@ export class Img
 
 }
 
+
 export class CroppedImgs
 {
     constructor(
