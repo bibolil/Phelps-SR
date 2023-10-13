@@ -5,7 +5,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="4" [rowspan]="7">
       <form [formGroup]="form" (ngSubmit)="uploadFile()">
-        <h1>Image upload</h1>
+        <h2>Image upload</h2>
         <input
           type="file"
           (change)="onFileChange($event)"
@@ -50,6 +50,17 @@
       </button>
     </mat-grid-tile>
     </div>
+    <!-- <div *ngIf="upscaled_crops_response"> -->
+      <div>
+    <mat-grid-tile [colspan]="4" [rowspan]="8">
+      <carousel *ngIf="upscaled_crops_response" 
+      [itemsPerSlide]="itemsPerSlide">
+        <slide *ngFor="let upscaledcrop of upscaled_crops">
+          <img src={{upscaledcrop}}  height="300" width="300">
+        </slide>
+      </carousel>
+    </mat-grid-tile>
+  </div>
  
 
   </mat-grid-list>

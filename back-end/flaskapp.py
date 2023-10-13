@@ -8,16 +8,13 @@ import os
 from imagekitio import ImageKit
 import base64
 import sys
+import io
 
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         base64_data = base64.b64encode(image_file.read())
         base64_string = base64_data.decode("utf-8")
         return base64_string
-def base64_to_image(base64_string):
-    header, base64_data = base64_string.split(",", 1)
-
-
 
 
 sys.path.append('yolo')
@@ -35,26 +32,40 @@ imagekit = ImageKit(
 
 @app.route('/SwinIR_multi_images', methods=['GET', 'POST'])
 def swinIR_multi_images():
-    # ERROR WITH BASE64 CONVERSION TO FIX 
-    # upload_folder = 'inputs'
-    # result_folder = 'results'
-    # if os.path.isdir(upload_folder):
-    #         shutil.rmtree(upload_folder)
-    # if os.path.isdir(result_folder):
-    #         shutil.rmtree(result_folder)
-    # os.mkdir(upload_folder)
-    # os.mkdir(result_folder)
-    # for index, base64_string in request.form.items():
-    #     dst_path = os.path.join(upload_folder,'image'+index+'.jpg')
-    #     base64_code=base64_string.split(",", 1)
-    #     decoded_image = base64.b64decode(base64_code)
-    #     image = Image.open(decoded_image)
-    #     image.save(dst_path)
-
-
-        
-
-    return { 'Status' : 'Success'}
+    response={}
+    upload_folder = 'inputs'
+    result_folder = 'results'
+    if os.path.isdir(upload_folder):
+            shutil.rmtree(upload_folder)
+    if os.path.isdir(result_folder):
+            shutil.rmtree(result_folder)
+    os.mkdir(upload_folder)
+    os.mkdir(result_folder)
+    for index, base64_string in request.form.items():
+        dst_path = os.path.join(upload_folder,'image'+index+'.jpg')
+        base64_code=base64_string.split(",", 1)[1]
+        decoded_image = base64.b64decode(base64_code)
+        image = io.BytesIO(decoded_image)
+        with open(dst_path, "wb") as f:
+            f.write(image.read())
+            f.close()
+    model_path='experiments/pretrained_models/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth'
+    large_model=False
+    tile=None
+    main_test_swinir.main('real_sr',4,15,40,128,large_model,model_path,upload_folder,None,tile,32)
+    result_path="results/swinir_real_sr_x4"
+    image_files = os.listdir(result_path)
+    for image_file in image_files:
+        try:
+            upload = imagekit.upload_file(
+                file=image_to_base64(result_path+'/'+image_file),
+                file_name=image_file,
+            ) 
+        except Exception as error:  
+            print(error)
+        response[image_file]=upload.response_metadata.raw["url"]
+    print(response)
+    return response
 
 @app.route('/SwinIR', methods=['GET', 'POST'])
 def swinIR_API():

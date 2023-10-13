@@ -16,6 +16,12 @@ export class FileUploaderYoloComponent {
   CropedImgs: CroppedImgs[] = [];
   loading = false;
   selectedCrops: any[] = [];
+  upscaled_crops_response = false;
+  upscaled_crops: any[] = [];
+  // carousel variables
+  itemsPerSlide = 3;
+
+
 
   constructor(private http:HttpClient, private service:Service, private sanitizer: DomSanitizer) {}
 
@@ -92,7 +98,11 @@ export class FileUploaderYoloComponent {
     for (const key of keys) {
       formData.append(key,(dictionary[key] as string));
     }
-    this.http.post('http://localhost:5000/SwinIR_multi_images',formData).subscribe((res:any)=>{console.log(res);});
+    this.http.post('http://localhost:5000/SwinIR_multi_images',formData).subscribe((res:any)=>{
+    this.upscaled_crops_response = true;
+    this.upscaled_crops=Object.values(res);
+
+  });
   }
 
 }

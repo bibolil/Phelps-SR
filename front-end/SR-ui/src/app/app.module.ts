@@ -15,6 +15,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { FileUploaderYoloComponent } from './file-uploader-yolo/file-uploader-yolo.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     LightboxModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    CarouselModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

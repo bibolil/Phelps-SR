@@ -17,7 +17,7 @@
     >
     </image-cropper>
     
-    <div class="preview" >
+    <div class="preview" *ngIf="cropImagePreview">
       <h4>Preview</h4>
       <img [src]="cropImagePreview" />
     </div>
