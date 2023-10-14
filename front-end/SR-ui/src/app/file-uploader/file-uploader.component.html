@@ -1,8 +1,12 @@
-<h1>Image upload</h1>
-<img [src]="url" height="200" />
+<mat-grid-list cols="4" rowHeight="50px">
+<mat-grid-tile [colspan]="4" [rowspan]="1" class="title">
+  <h1>Manual crop</h1>
+</mat-grid-tile>
 <form [formGroup]="form" (ngSubmit)="uploadFile()">
+  <mat-grid-tile [colspan]="4" [rowspan]="2">
   <input type="file" (change)="onFileChange($event)" formControlName="image" />
-  <div class="image-container" >
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="8">
     <image-cropper
       class="cropper"
       [imageChangedEvent]="imgChangedEvent"
@@ -16,15 +20,18 @@
       (loadImageFailed)="loadImageFailed()"
     >
     </image-cropper>
-    
-    <div class="preview" *ngIf="cropImagePreview">
-      <h4>Preview</h4>
-      <img [src]="cropImagePreview" />
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="8">
+    <div *ngIf="cropImagePreview">
+
+ <img [src]="cropImagePreview"/>
     </div>
-  </div>
+  </mat-grid-tile>
 
-
+  <mat-grid-tile [colspan]="4" [rowspan]="1">
   <button class="btn btn-primary submit-btn" [disabled]="!form.valid" type="submit">
     upscale
   </button>
+</mat-grid-tile>
 </form>
+</mat-grid-list>

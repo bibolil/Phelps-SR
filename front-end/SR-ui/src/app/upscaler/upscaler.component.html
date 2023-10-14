@@ -1,4 +1,5 @@
 <div *ngIf="manual">
+  <mat-grid-list cols="4" rowHeight="50px" >  
   <div class="align-right">
     <button class="btn btn-outline-primary" (click)="switchToAuto()">Auto crop with AI</button>
   </div>
@@ -9,14 +10,15 @@
   </div>
   <div class="row">
     <div class="p-4">
-      <h1>Image displayer</h1>
       <app-file-previewer></app-file-previewer>
     </div>
   </div>
+</mat-grid-list>
 </div>
 <div *ngIf="manual == false">
   <div class="align-right">
     <button class="btn btn-outline-primary" (click)="switchToManual()">Manual crop</button>
   </div>
       <app-file-uploader-yolo></app-file-uploader-yolo>
+      
 </div>
